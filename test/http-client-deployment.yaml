@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-nginx
+  labels:
+    app: "client-nginx"
+spec:
+  selector:
+    matchLabels:
+      app: "client-nginx"
+  replicas: 20
+  template:
+    metadata:
+      labels:
+        app: "client-nginx"
+    spec:
+      containers:
+        - name: client-nginx
+          image: djadvc/client-nginx
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          env:
+            - name: WEBSITE_PORT
+              value: "80"
+            - name: WEBSITE_HOST
+              value: "nginx-service"
+     

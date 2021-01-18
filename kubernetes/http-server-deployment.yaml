@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-server
+  labels:
+    app: "web-server"
+spec:
+  selector:
+    matchLabels:
+      app: "web-server"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: "web-server"
+        tier: "webserv"
+    spec:
+      containers:
+        - name: web-server
+          image: djadvc/test-http-server
+          ports:
+          - containerPort: 4443
+          env:
+            - name: WEBSITE_PORT
+              value: "4443"
+            - name: WEBSITE_HOST
+              value: "0.0.0.0"
+     
