@@ -1,0 +1,15 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: http-client-job
+            image: djadvc/test-http-client
+            imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure
